@@ -1,0 +1,44 @@
+services:
+  date:
+    image: busybox
+    command: date
+    deploy:
+      labels:
+        - "cirona.enable=true"
+        - "cirona.schedule=* * * * *"
+        - "cirona.replicas=2"
+      replicas: 0
+      restart_policy:
+        condition: none
+  error:
+    image: busybox
+    command: ["sh", "-c", "date >&2; exit 1"]
+    deploy:
+      labels:
+        - "cirona.enable=true"
+        - "cirona.schedule=*/2 * * * *"
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 2
+  sleep:
+    image: busybox
+    command: ["sh", "-c", "sleep 5 && date"]
+    deploy:
+      labels:
+        - "cirona.enable=true"
+        - "cirona.schedule=* * * * *"
+      replicas: 0
+      restart_policy:
+        condition: none
+  disabled:
+    image: busybox
+    command: date
+    deploy:
+      labels:
+        - "cirona.enable=false"
+        - "cirona.schedule=* * * * *"
+      replicas: 1
+      restart_policy:
+        condition: none
+

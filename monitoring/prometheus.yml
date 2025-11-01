@@ -1,0 +1,6 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'cirona'
+    static_configs:
+      - targets: ['cirona:9100']
