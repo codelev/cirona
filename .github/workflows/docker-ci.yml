@@ -15,7 +15,6 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build and push Docker image
@@ -24,5 +23,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/codelev/cirona:${{ github.ref_name }}
-            ghcr.io/codelev/cirona:latest
+            codelev/cirona:${{ github.ref_name }}
+            codelev/cirona:latest
