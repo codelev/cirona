@@ -208,8 +208,8 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 12,
-        "x": 16,
+        "w": 10,
+        "x": 18,
         "y": 0
       },
       "id": 20,
@@ -253,14 +253,14 @@
       },
       "gridPos": {
         "h": 10,
-        "w": 6,
+        "w": 8,
         "x": 6,
         "y": 6
       },
       "id": 30,
       "targets": [
         {
-          "expr": "sum by(service) (increase(cirona_job_executions_total{service=~\"$service\"}[$__range]))",
+          "expr": "sum by(service, schedule) (increase(cirona_job_executions_total{service=~\"$service\"}[$__range]))",
           "refId": "A",
           "instant": true,
           "format": "table"
@@ -465,6 +465,6 @@
   "timezone": "",
   "title": "Cirona self-configuring job scheduler for Docker Swarm",
   "uid": "cirona",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

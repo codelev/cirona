@@ -15,6 +15,8 @@ Features:
   - exit code
   - stdout and stderr line.
 
+![Grafana](monitoring/grafana.png)
+
 ## Quickstart
 
 1. Create `docker-compose.cirona.yml`:
@@ -128,8 +130,6 @@ You can try it out locally using the commands below, that set up Cirona, Prometh
 docker stack deploy -c monitoring/docker-compose.yml cirona
 docker stack deploy -c monitoring/docker-compose.jobs.yml jobs
 ```
-
-![Grafana](monitoring/grafana.png)
 
 Once the stack is running, log in Grafana at http://localhost:3000 with username `admin` and password `admin`.
 The [cirona.json](https://github.com/codelev/cirona/tree/main/monitoring/cirona.json) is already installed and ready to use.
