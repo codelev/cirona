@@ -346,7 +346,7 @@
       "id": 50,
       "targets": [
         {
-          "expr": "cirona_job_execution_status{service=~\"$service\"} > ($__from / 1000) < ($__to / 1000)",
+          "expr": "sort_desc(cirona_job_execution_status{service=~\"$service\"} * 1000) > ($__from) < ($__to)",
           "format": "table",
           "instant": true,
           "refId": "A"
@@ -354,6 +354,24 @@
       ],
       "fieldConfig": {
         "overrides": [
+          {
+            "matcher": { 
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.align", "value": "left"
+              },
+              {
+                "id": "unit", "value": "dateTimeAsIso"
+              },
+              {
+                "id": "displayName",
+                "value": "timestamp"
+              }
+            ]
+          },
           {
             "matcher": {
               "id": "byName",
@@ -395,15 +413,15 @@
               "Time": true,
               "job": true,
               "time": true,
-              "Value": true,
               "instance": true
             },
             "indexByName": {
-              "service": 0,
-              "replica": 1,
-              "exit_code": 2,
-              "stdout": 3,
-              "stderr": 4
+              "Value": 0,
+              "service": 1,
+              "replica": 2,
+              "exit_code": 3,
+              "stdout": 4,
+              "stderr": 5
             }
           }
         }
@@ -465,6 +483,6 @@
   "timezone": "",
   "title": "Cirona self-configuring job scheduler for Docker Swarm",
   "uid": "cirona",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

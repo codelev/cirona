@@ -17,6 +17,13 @@ Features:
 
 ![Grafana](monitoring/grafana.png)
 
+A naive approach of using cron inside containers has critical flaws:
+- overlapping jobs: cron starts new jobs regardless of whether previous ones have finished,
+- poor reliability: if the container crashes or is removed by Swarm, scheduled jobs fail silently,
+- limited observability: job status and output remain trapped inside the container.
+
+These issues cannot be resolved at the container level. Cirona operates at the orchestrator level, providing reliable job scheduling across the cluster.
+
 ## Quickstart
 
 1. Create `docker-compose.cirona.yml`:
@@ -57,7 +64,7 @@ services:
         condition: none
 ```
 
-### Database dump
+### Dump database
 
 An example job that dumps a MariaDB database every 6 hours, with up to 3 retry attempts on failure:
 ```dockerfile
@@ -87,7 +94,7 @@ services:
         max_attempts: 3
 ```
 
-### Docker prune
+### Prune Docker
 
 An example job that cleans up unused Docker data on every node in a Docker Swarm cluster hourly:
 ```dockerfile
@@ -181,5 +188,4 @@ curl http://localhost:9100/metrics
 
 ## Credits
 
-- [Laurel](https://twitter.com/laurelcomics)
 - [CrazyMax](https://crazymax.dev)
